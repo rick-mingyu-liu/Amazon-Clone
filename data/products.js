@@ -111,7 +111,9 @@ export function loadProducts(fun) {
   xhr.send();
 }
 
-loadProducts();
+loadProducts(() => {
+  
+});
 
 /*
 export const products = [
