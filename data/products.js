@@ -1,12 +1,12 @@
-import {formatCurrency} from "../scripts/utils/money.js";
+import {formatCurrency} from '../scripts/utils/money.js';
 
 export function getProduct(productId) {
   let matchingProduct;
 
-  products.forEach((product)=>{
-      if (product.id === productId){
-          matchingProduct = product;
-      }
+  products.forEach((product) => {
+    if (product.id === productId) {
+      matchingProduct = product;
+    }
   });
 
   return matchingProduct;
@@ -32,15 +32,15 @@ class Product {
   }
 
   getPrice() {
-    return ` $${formatCurrency(this.priceCents)}`;
+    return `$${formatCurrency(this.priceCents)}`;
   }
 
   extraInfoHTML() {
-    return "";
+    return '';
   }
 }
 
-class Clothing extends Product{
+class Clothing extends Product {
   sizeChartLink;
 
   constructor(productDetails) {
@@ -49,49 +49,56 @@ class Clothing extends Product{
   }
 
   extraInfoHTML() {
-    //super.extraInfoHTML();
-
+    // super.extraInfoHTML();
     return `
       <a href="${this.sizeChartLink}" target="_blank">
-        Size Chart
+        Size chart
       </a>
-    `; 
+    `;
   }
 }
 
-// const date = new Date();
-// console.log(date);
-// console.log(date.toLocaleDateString());
+/*
+const date = new Date();
+console.log(date);
+console.log(date.toLocaleTimeString());
+*/
 
-// const object2 = {
-//   a: 2,
-//   b: this.a
-// };
+/*
+console.log(this);
 
-// function logThis() {
-//   console.log(this);
-// }
-// logThis();
-// logThis.call('hello');
+const object2 = {
+  a: 2,
+  b: this.a
+};
+*/
 
-// this
-// const object3 = {
-//   method: () => {
-//     console.log(this);
-//   }
-// };
+/*
+function logThis() {
+  console.log(this);
+}
+logThis();
+logThis.call('hello');
+
+this
+const object3 = {
+  method: () => {
+    console.log(this);
+  }
+};
+object3.method();
+*/
 
 export let products = [];
 
 export function loadProducts(fun) {
   const xhr = new XMLHttpRequest();
 
-  xhr.addEventListener('load', () =>{
+  xhr.addEventListener("load", () => {
     products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === "clothing") {
+      if (productDetails.type === 'clothing') {
         return new Clothing(productDetails);
       }
-    
       return new Product(productDetails);
     });
 
@@ -100,7 +107,7 @@ export function loadProducts(fun) {
     fun();
   });
 
-  xhr.open('GET', "https://supersimplebackend.dev/products");
+  xhr.open('GET', 'https://supersimplebackend.dev/products');
   xhr.send();
 }
 
@@ -768,4 +775,3 @@ export const products = [
   }
 ]
 */
-
